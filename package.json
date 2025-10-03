@@ -1,0 +1,11 @@
+{
+  "name": "idea-nick",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "prettify": "prettier --log-level log --cache --write {webapp,backend}/src/**/*.{ts,tsx,js,json,yml,scss} !**/{node_modules,dist}/**/*"
+  },
+  "devDependencies": {
+    "prettier": "3.0.1"
+  }
+}
