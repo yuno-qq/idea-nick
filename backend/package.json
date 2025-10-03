@@ -6,7 +6,8 @@
     "dev": "ts-node-dev --rs ./src/index.ts",
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
     "start": "node ./dist/index.js",
-    "types": "tsc --noEmit --project ./tsconfig.json"
+    "types": "tsc --noEmit --project ./tsconfig.json",
+    "lint": "eslint --fix --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts ."
   },
   "dependencies": {
     "@trpc/server": "10.37.1",
