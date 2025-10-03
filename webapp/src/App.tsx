@@ -1,4 +1,6 @@
-export const App = () => {
+import {TrpcProvider} from "./lib/trpc";
+
+export const AllIdeasPage = () => {
   return (
     <div>
       <h1>Idea nick</h1>
@@ -11,4 +13,12 @@ export const App = () => {
       ))}
     </div>
   )
+}
+
+export const App = () => {
+    return (
+        <TrpcProvider>
+            <AllIdeasPage />
+        </TrpcProvider>
+    )
 }
