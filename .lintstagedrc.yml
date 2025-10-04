@@ -1,0 +1,1 @@
+'*.{ts,js,json,yml}': 'prettier --log-level log --cache --write'
