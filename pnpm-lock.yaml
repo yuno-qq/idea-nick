@@ -56,6 +56,9 @@ importers:
       express:
         specifier: 4.18.2
         version: 4.18.2
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
     devDependencies:
       '@types/cors':
         specifier: 2.8.13
@@ -63,6 +66,9 @@ importers:
       '@types/express':
         specifier: 4.17.17
         version: 4.17.17
+      '@types/lodash':
+        specifier: ^4.17.20
+        version: 4.17.20
       '@types/node':
         specifier: ^24.6.2
         version: 24.6.2
@@ -74,19 +80,22 @@ importers:
         version: link:../backend
       '@tanstack/react-query':
         specifier: 4.32.6
-        version: 4.32.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 4.32.6(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       '@trpc/client':
         specifier: 10.37.1
         version: 10.37.1(@trpc/server@10.37.1)
       '@trpc/react-query':
         specifier: 10.37.1
-        version: 10.37.1(@tanstack/react-query@4.32.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       react:
         specifier: ^19.1.1
         version: 19.2.0
       react-dom:
-        specifier: ^19.1.1
-        version: 19.2.0(react@19.2.0)
+        specifier: ^18.2.0
+        version: 18.2.0(react@19.2.0)
+      react-router-dom:
+        specifier: 6.15.0
+        version: 6.15.0(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@types/node':
         specifier: ^24.6.0
@@ -1007,6 +1016,10 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@remix-run/router@1.8.0':
+    resolution: {integrity: sha512-mrfKqIHnSZRyIzBcanNJmVQELTnX+qagEDlcKO90RgRBVOZGSGvZKeDihTRfWcqoDn5N/NkUcwWTccnpN18Tfg==}
+    engines: {node: '>=14.0.0'}
+
   '@rolldown/pluginutils@1.0.0-beta.38':
     resolution: {integrity: sha512-N/ICGKleNhA5nc9XXQG/kkKHJ7S55u0x0XUJbbkmdCnFuoRkM1Il12q9q0eX19+M7KKUEPw/daUPIRnxhcxAIw==}
 
@@ -1208,6 +1221,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
@@ -2655,10 +2671,10 @@ packages:
     resolution: {integrity: sha512-qqJBtEyVgS0ZmPGdCFPWJ3FreoqvG4MVQln/kCgF7Olq95IbOp0/BWyMwbdtn4VTvkM8Y7khCQ2Xgk/tcrCXig==}
     engines: {node: '>= 0.8'}
 
-  react-dom@19.2.0:
-    resolution: {integrity: sha512-UlbRu4cAiGaIewkPyiRGJk0imDN2T3JjieT6spoL2UeSf5od4n5LB/mQ4ejmxhCFT1tYe8IvaFulzynWovsEFQ==}
+  react-dom@18.2.0:
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
-      react: ^19.2.0
+      react: ^18.2.0
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -2666,6 +2682,19 @@ packages:
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
+
+  react-router-dom@6.15.0:
+    resolution: {integrity: sha512-aR42t0fs7brintwBGAv2+mGlCtgtFQeOzK0BM1/OiqEzRejOZtpMZepvgkscpMUnKb8YO84G7s3LsHnnDNonbQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
+  react-router@6.15.0:
+    resolution: {integrity: sha512-NIytlzvzLwJkCQj2HLefmeakxxWHWAP+02EGqWEZy+DgfHHKQMUoBBjUQLOtFInBMhWtb3hiUy6MfFgwLjXhqg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
 
   react@19.2.0:
     resolution: {integrity: sha512-tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==}
@@ -2776,8 +2805,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  scheduler@0.27.0:
-    resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
+  scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -4234,6 +4263,8 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
+  '@remix-run/router@1.8.0': {}
+
   '@rolldown/pluginutils@1.0.0-beta.38': {}
 
   '@rollup/rollup-android-arm-eabi@4.52.4':
@@ -4308,25 +4339,25 @@ snapshots:
 
   '@tanstack/query-core@4.32.6': {}
 
-  '@tanstack/react-query@4.32.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@tanstack/react-query@4.32.6(react-dom@18.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@tanstack/query-core': 4.32.6
       react: 19.2.0
       use-sync-external-store: 1.6.0(react@19.2.0)
     optionalDependencies:
-      react-dom: 19.2.0(react@19.2.0)
+      react-dom: 18.2.0(react@19.2.0)
 
   '@trpc/client@10.37.1(@trpc/server@10.37.1)':
     dependencies:
       '@trpc/server': 10.37.1
 
-  '@trpc/react-query@10.37.1(@tanstack/react-query@4.32.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@trpc/react-query@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
-      '@tanstack/react-query': 4.32.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@tanstack/react-query': 4.32.6(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       '@trpc/client': 10.37.1(@trpc/server@10.37.1)
       '@trpc/server': 10.37.1
       react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
+      react-dom: 18.2.0(react@19.2.0)
 
   '@trpc/server@10.37.1': {}
 
@@ -4393,6 +4424,8 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/lodash@4.17.20': {}
 
   '@types/mime@1.3.5': {}
 
@@ -6114,14 +6147,27 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-dom@19.2.0(react@19.2.0):
+  react-dom@18.2.0(react@19.2.0):
     dependencies:
+      loose-envify: 1.4.0
       react: 19.2.0
-      scheduler: 0.27.0
+      scheduler: 0.23.2
 
   react-is@16.13.1: {}
 
   react-refresh@0.17.0: {}
+
+  react-router-dom@6.15.0(react-dom@18.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      '@remix-run/router': 1.8.0
+      react: 19.2.0
+      react-dom: 18.2.0(react@19.2.0)
+      react-router: 6.15.0(react@19.2.0)
+
+  react-router@6.15.0(react@19.2.0):
+    dependencies:
+      '@remix-run/router': 1.8.0
+      react: 19.2.0
 
   react@19.2.0: {}
 
@@ -6269,7 +6315,9 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  scheduler@0.27.0: {}
+  scheduler@0.23.2:
+    dependencies:
+      loose-envify: 1.4.0
 
   semver@6.3.1: {}
 
