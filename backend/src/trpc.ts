@@ -22,7 +22,9 @@ const trpc = initTRPC.create()
 const x: string = 'asdad'
 console.info(x)
 
-// if (Math.round(4.2)) console.info(x)
+if (Math.round(4.2)) {
+  console.info(x)
+}
 
 export const trpcRouter = trpc.router({
   getIdeas: trpc.procedure.query(() => {
