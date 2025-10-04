@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Segment } from '../../components/Segment'
 import { getViewIdeaRoute } from '../../lib/routes.ts'
 import { trpc } from '../../lib/trpc'
 import css from './index.module.scss'
@@ -15,21 +16,22 @@ export const AllIdeasPage = () => {
   }
 
   return (
-    <div>
-      <h1 className={css.title}>Idea nick</h1>
-
+    <Segment title="All Ideas">
       <div className={css.ideas}>
         {data.ideas.map((idea) => (
           <div key={idea.nick} className={css.idea}>
-            <h2 className={css.ideaName}>
-              <Link className={css.ideaLink} to={getViewIdeaRoute({ ideaNick: idea.nick })}>
-                {idea.name}
-              </Link>
-            </h2>
-            <p className={css.ideaDescription}>{idea.description}</p>
+            <Segment
+              size={2}
+              title={
+                <Link className={css.ideaLink} to={getViewIdeaRoute({ ideaNick: idea.nick })}>
+                  {idea.name}
+                </Link>
+              }
+              description={idea.description}
+            />
           </div>
         ))}
       </div>
-    </div>
+    </Segment>
   )
 }
