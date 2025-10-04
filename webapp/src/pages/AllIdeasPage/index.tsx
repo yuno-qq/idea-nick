@@ -3,6 +3,13 @@ import { trpc } from '../../lib/trpc'
 export const AllIdeasPage = () => {
   const { data, error, isLoading, isFetching, isError } = trpc.getIdeas.useQuery()
 
+  const x: string = 'asdad'
+  console.info(x)
+
+  if (Math.round(4.2)) {
+    console.info(x)
+  }
+
   if (isLoading || isFetching) {
     return <span>...Loading</span>
   }
