@@ -22,6 +22,10 @@ const trpc = initTRPC.create()
 const x: string = 'asdad'
 console.info(x)
 
+if (Math.round(3.33)) {
+  console.info(x)
+}
+
 if (Math.round(4.2)) {
   console.info(x)
 }
