@@ -4,6 +4,7 @@ import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
+import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
@@ -42,23 +43,25 @@ export const NewIdeaPage = () => {
   return (
     <Segment title="New Idea">
       <form onSubmit={formik.handleSubmit}>
-        <Input name="name" label="Name" formik={formik} />
-        <Input name="nick" label="Nick" formik={formik} />
-        <Input name="description" label="Description" formik={formik} maxWidth={500} />
-        <Textarea name="text" label="Text" formik={formik} />
-        {!formik.isValid && !!formik.submitCount && <Alert color="red">Some fields are invalid</Alert>}
-        {!!submitingError && <Alert color="red">{submitingError}</Alert>}
-        {successMessageTimeout && <Alert color="green">Idea created!</Alert>}
-        <Button
-          onClick={() => {
-            setSubmittingError(null)
-            setSuccessMessageTimeout(undefined)
-            clearTimeout(successMessageTimeout)
-          }}
-          loading={formik.isSubmitting}
-        >
-          Create Idea
-        </Button>
+        <FormItems>
+          <Input name="name" label="Name" formik={formik} />
+          <Input name="nick" label="Nick" formik={formik} />
+          <Input name="description" label="Description" formik={formik} maxWidth={500} />
+          <Textarea name="text" label="Text" formik={formik} />
+          {!formik.isValid && !!formik.submitCount && <Alert color="red">Some fields are invalid</Alert>}
+          {!!submitingError && <Alert color="red">{submitingError}</Alert>}
+          {successMessageTimeout && <Alert color="green">Idea created!</Alert>}
+          <Button
+            onClick={() => {
+              setSubmittingError(null)
+              setSuccessMessageTimeout(undefined)
+              clearTimeout(successMessageTimeout)
+            }}
+            loading={formik.isSubmitting}
+          >
+            Create Idea
+          </Button>
+        </FormItems>
       </form>
     </Segment>
   )
