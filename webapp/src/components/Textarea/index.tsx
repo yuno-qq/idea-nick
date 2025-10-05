@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import type { FormikProps } from 'formik'
-import css from '../Input/index.module.scss'
+import css from '../Textarea/index.module.scss'
 
 export const Textarea = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
   const value = formik.values[name]
