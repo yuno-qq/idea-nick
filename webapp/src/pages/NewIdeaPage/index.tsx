@@ -19,9 +19,7 @@ export const NewIdeaPage = () => {
         }}
       >
         <Input name="name" label="Name" state={state} setState={setState} />
-
         <Input name="nick" label="Nick" state={state} setState={setState} />
-
         <Input name="description" label="Description" state={state} setState={setState} />
 
         <div style={{ marginBottom: 10 }}>
