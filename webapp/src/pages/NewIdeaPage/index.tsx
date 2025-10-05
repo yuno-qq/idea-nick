@@ -8,7 +8,9 @@ import { Textarea } from '../../components/Textarea'
 import { trpc } from '../../lib/trpc'
 
 export const NewIdeaPage = () => {
-  const [successMessageTimeout, setSuccessMessageTimeout] = useState<NodeJS.Timeout | undefined>(undefined)
+  const [successMessageTimeout, setSuccessMessageTimeout] = useState<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  )
   const [submitingError, setSubmittingError] = useState<string | null>(null)
   const createIdea = trpc.createIdea.useMutation()
 
