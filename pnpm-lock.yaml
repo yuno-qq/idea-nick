@@ -91,8 +91,11 @@ importers:
         specifier: 10.37.1
         version: 10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       formik:
-        specifier: ^2.4.6
-        version: 2.4.6(@types/react@19.2.0)(react@19.2.0)
+        specifier: 2.4.4
+        version: 2.4.4(react@19.2.0)
+      formik-validator-zod:
+        specifier: ^1.0.2
+        version: 1.0.2(formik@2.4.4(react@19.2.0))(zod@3.22.2)
       include-media:
         specifier: ^2.0.0
         version: 2.0.0
@@ -111,6 +114,9 @@ importers:
       sass:
         specifier: ^1.93.2
         version: 1.93.2
+      zod:
+        specifier: 3.22.2
+        version: 3.22.2
     devDependencies:
       '@types/node':
         specifier: ^24.6.0
@@ -1342,11 +1348,6 @@ packages:
   '@types/express@4.17.17':
     resolution: {integrity: sha512-Q4FmmuLGBG58btUnfS1c1r/NQdlp3DMfGDGig8WhfpA2YRUtEkxAjkZb0yvplJGYdF1fsQ81iMDcH24sSCNC/Q==}
 
-  '@types/hoist-non-react-statics@3.3.7':
-    resolution: {integrity: sha512-PQTyIulDkIDro8P+IHbKCsw7U2xxBYflVzW/FgWdCAePD9xGSidgA76/GeJ6lBKoblyhf9pBY763gbrN+1dI8g==}
-    peerDependencies:
-      '@types/react': '*'
-
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==}
 
@@ -2245,8 +2246,14 @@ packages:
     resolution: {integrity: sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==}
     engines: {node: '>=14'}
 
-  formik@2.4.6:
-    resolution: {integrity: sha512-A+2EI7U7aG296q2TLGvNapDNTZp1khVt5Vk0Q/fyfSROss0V/V6+txt2aJnwEos44IxTCW/LYAi/zgWzlevj+g==}
+  formik-validator-zod@1.0.2:
+    resolution: {integrity: sha512-1348tUpeHUCHf6HcNT/XLf2odSddbPgbUR1WAPFUM8vbXA+d6cj6sC1oV7aoo0dr9oFQm46gbz7pSdQiydFEuQ==}
+    peerDependencies:
+      formik: ^2.2.9
+      zod: ^3.19.1
+
+  formik@2.4.4:
+    resolution: {integrity: sha512-MV99upag7fCC3JfsI60WcxhymwNZnJUcMcnGuoz6mDf78SUfBbKjmfcA9LzHx4lEmjzmOflhP7oqz+ZQv5eStg==}
     peerDependencies:
       react: '>=16.8.0'
 
@@ -3744,6 +3751,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.22.2:
+    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
+
   zod@4.1.11:
     resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
 
@@ -5002,11 +5012,6 @@ snapshots:
       '@types/qs': 6.14.0
       '@types/serve-static': 1.15.8
 
-  '@types/hoist-non-react-statics@3.3.7(@types/react@19.2.0)':
-    dependencies:
-      '@types/react': 19.2.0
-      hoist-non-react-statics: 3.3.2
-
   '@types/http-errors@2.0.5': {}
 
   '@types/json-schema@7.0.15': {}
@@ -6183,9 +6188,13 @@ snapshots:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
-  formik@2.4.6(@types/react@19.2.0)(react@19.2.0):
+  formik-validator-zod@1.0.2(formik@2.4.4(react@19.2.0))(zod@3.22.2):
     dependencies:
-      '@types/hoist-non-react-statics': 3.3.7(@types/react@19.2.0)
+      formik: 2.4.4(react@19.2.0)
+      zod: 3.22.2
+
+  formik@2.4.4(react@19.2.0):
+    dependencies:
       deepmerge: 2.2.1
       hoist-non-react-statics: 3.3.2
       lodash: 4.17.21
@@ -6194,8 +6203,6 @@ snapshots:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.8.1
-    transitivePeerDependencies:
-      - '@types/react'
 
   forwarded@0.2.0: {}
 
@@ -7774,5 +7781,7 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.22.2: {}
 
   zod@4.1.11: {}
