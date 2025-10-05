@@ -1,4 +1,4 @@
-import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/lib/router/createIdea/input'
+import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/createIdea/input'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'

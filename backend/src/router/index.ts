@@ -1,4 +1,4 @@
-import { trpc } from '../trpc'
+import { trpc } from '../lib/trpc'
 import { createIdeaTrpcRoute } from './createIdea'
 import { getIdeaTrpcRoute } from './getIdea'
 import { getIdeasTrpcRoute } from './getIdeas'

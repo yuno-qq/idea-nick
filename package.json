@@ -11,6 +11,9 @@
     "prettify": "prettier --log-level log --cache --write {webapp,backend}/src/**/*.{ts,tsx,js,json,yml,scss} !**/{node_modules,dist}/**/*",
     "prepare": "husky"
   },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
   "devDependencies": {
     "concurrently": "^9.2.1",
     "eslint": "8.47.0",

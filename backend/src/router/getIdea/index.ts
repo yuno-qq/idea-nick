@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { ideas } from '../../ideas'
-import { trpc } from '../../trpc'
+import { ideas } from '../../lib/ideas'
+import { trpc } from '../../lib/trpc'
 
 export const getIdeaTrpcRoute = trpc.procedure
   .input(
