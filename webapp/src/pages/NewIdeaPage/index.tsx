@@ -2,6 +2,7 @@ import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/lib/router/createIde
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
+import { Alert } from '../../components/Alert'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
@@ -23,11 +24,9 @@ export const NewIdeaPage = () => {
     },
     validate: withZodSchema(zCreateIdeaTrpcInput),
     onSubmit: async (values) => {
-      setSubmittingError(null)
       try {
         await createIdea.mutateAsync(values)
-        // formik.resetForm();
-        clearTimeout(successMessageTimeout)
+        formik.resetForm()
         setSuccessMessageTimeout(
           setTimeout(() => {
             setSuccessMessageTimeout(undefined)
@@ -46,10 +45,18 @@ export const NewIdeaPage = () => {
         <Input name="nick" label="Nick" formik={formik} />
         <Input name="description" label="Description" formik={formik} maxWidth={500} />
         <Textarea name="text" label="Text" formik={formik} />
-        {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
-        {!!submitingError && <div style={{ color: 'red' }}>{submitingError}</div>}
-        {successMessageTimeout && <div style={{ color: 'green' }}>Idea created!</div>}
-        <button type="submit" disabled={formik.isSubmitting}>
+        {!formik.isValid && !!formik.submitCount && <Alert color="red">Some fields are invalid</Alert>}
+        {!!submitingError && <Alert color="red">{submitingError}</Alert>}
+        {successMessageTimeout && <Alert color="green">Idea created!</Alert>}
+        <button
+          type="submit"
+          disabled={formik.isSubmitting}
+          onClick={() => {
+            setSubmittingError(null)
+            setSuccessMessageTimeout(undefined)
+            clearTimeout(successMessageTimeout)
+          }}
+        >
           {formik.isSubmitting ? 'Submitting...' : 'Create Idea'}
         </button>
       </form>
