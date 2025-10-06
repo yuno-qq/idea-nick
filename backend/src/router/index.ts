@@ -9,6 +9,7 @@ export const trpcRouter = trpc.router({
   getIdea: getIdeaTrpcRoute,
   createIdea: createIdeaTrpcRoute,
   signUp: signUpTrcpRoute,
+  signIn: signUpTrcpRoute,
 })
 
 export type TrpcRouter = typeof trpcRouter

@@ -1,33 +1,46 @@
-import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/createIdea/input'
+import { zSignUpTrpcInput } from '@ideanick/backend/src/router/signUp/input'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
+import { z } from 'zod'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
 import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
-import { Textarea } from '../../components/Textarea'
-import { trpc } from '../../lib/trpc'
+import { trpc } from '../../lib/trpc.tsx'
 
-export const NewIdeaPage = () => {
+export const SignUpPage = () => {
   const [successMessageTimeout, setSuccessMessageTimeout] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
   )
   const [submittingError, setSubmittingError] = useState<string | null>(null)
-  const createIdea = trpc.createIdea.useMutation()
+  const signUp = trpc.signUp.useMutation()
 
   const formik = useFormik({
     initialValues: {
-      name: '',
       nick: '',
-      description: '',
-      text: '',
+      password: '',
+      passwordAgain: '',
     },
-    validate: withZodSchema(zCreateIdeaTrpcInput),
+    validate: withZodSchema(
+      zSignUpTrpcInput
+        .extend({
+          passwordAgain: z.string().min(1),
+        })
+        .superRefine((values, ctx) => {
+          if (values.password !== values.passwordAgain) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Password must be a same',
+              path: ['passwordAgain'],
+            })
+          }
+        })
+    ),
     onSubmit: async (values) => {
       try {
-        await createIdea.mutateAsync(values)
+        await signUp.mutateAsync(values)
         formik.resetForm()
         setSuccessMessageTimeout(
           setTimeout(() => {
@@ -41,16 +54,15 @@ export const NewIdeaPage = () => {
   })
 
   return (
-    <Segment title="New Idea">
+    <Segment title="Sign Up">
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
-          <Input name="name" label="Name" formik={formik} />
           <Input name="nick" label="Nick" formik={formik} />
-          <Input name="description" label="Description" formik={formik} maxWidth={500} />
-          <Textarea name="text" label="Text" formik={formik} />
+          <Input name="password" label="Password" type="password" formik={formik} />
+          <Input name="passwordAgain" label="Password again" type="password" formik={formik} />
           {!formik.isValid && !!formik.submitCount && <Alert color="red">Some fields are invalid</Alert>}
           {!!submittingError && <Alert color="red">{submittingError}</Alert>}
-          {successMessageTimeout && <Alert color="green">Idea created!</Alert>}
+          {successMessageTimeout && <Alert color="green">Thanks for sign up!</Alert>}
           <Button
             onClick={() => {
               setSubmittingError(null)
@@ -59,7 +71,7 @@ export const NewIdeaPage = () => {
             }}
             loading={formik.isSubmitting}
           >
-            Create Idea
+            Sign Up
           </Button>
         </FormItems>
       </form>
