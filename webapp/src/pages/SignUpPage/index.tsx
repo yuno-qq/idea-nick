@@ -8,7 +8,7 @@ import { Button } from '../../components/Button'
 import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
-import { trpc } from '../../lib/trpc.tsx'
+import { trpc } from '../../lib/trpc'
 
 export const SignUpPage = () => {
   const [successMessageTimeout, setSuccessMessageTimeout] = useState<ReturnType<typeof setTimeout> | undefined>(
