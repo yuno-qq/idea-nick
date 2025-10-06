@@ -2,6 +2,7 @@ import { trpc } from '../lib/trpc'
 import { createIdeaTrpcRoute } from './createIdea'
 import { getIdeaTrpcRoute } from './getIdea'
 import { getIdeasTrpcRoute } from './getIdeas'
+import { signInTrpcRoute } from './signIn'
 import { signUpTrcpRoute } from './signUp'
 
 export const trpcRouter = trpc.router({
@@ -9,7 +10,7 @@ export const trpcRouter = trpc.router({
   getIdea: getIdeaTrpcRoute,
   createIdea: createIdeaTrpcRoute,
   signUp: signUpTrcpRoute,
-  signIn: signUpTrcpRoute,
+  signIn: signInTrpcRoute,
 })
 
 export type TrpcRouter = typeof trpcRouter
