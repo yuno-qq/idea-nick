@@ -23,6 +23,9 @@ importers:
       eslint-config-standard-with-typescript:
         specifier: 37.0.0
         version: 37.0.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.47.0)(typescript@5.9.3))(eslint@8.47.0)(typescript@5.9.3))(eslint-plugin-import@2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.47.0)(typescript@5.9.3))(eslint@8.47.0))(eslint-plugin-n@16.6.2(eslint@8.47.0))(eslint-plugin-promise@6.6.0(eslint@8.47.0))(eslint@8.47.0)(typescript@5.9.3)
+      eslint-plugin-node:
+        specifier: 11.1.0
+        version: 11.1.0(eslint@8.47.0)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -102,9 +105,6 @@ importers:
       '@types/passport-jwt':
         specifier: 3.0.9
         version: 3.0.9
-      eslint-plugin-node:
-        specifier: 11.1.0
-        version: 11.1.0(eslint@8.47.0)
       prisma:
         specifier: 5.2.0
         version: 5.2.0
