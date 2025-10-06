@@ -1,5 +1,4 @@
 extends:
-  - react-app
   - ../.eslintrc.yml
 parserOptions:
   project: ./tsconfig.app.json
