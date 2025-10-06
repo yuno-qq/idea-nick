@@ -1,13 +1,24 @@
 import cors from 'cors'
 import express from 'express'
+import { type AppContext, createAppContext } from './lib/ctx'
 import { applyTrpcToExpressApp } from './lib/trpc'
 import { trpcRouter } from './router'
 
-const expressApp = express()
+let ctx: AppContext | null = null
 
-expressApp.use(cors())
-applyTrpcToExpressApp(expressApp, trpcRouter)
+void (async () => {
+  try {
+    ctx = createAppContext()
+    const expressApp = express()
 
-expressApp.listen(3000, () => {
-  console.info('Listening at http://localhost:3000')
-})
+    expressApp.use(cors())
+    applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
+
+    expressApp.listen(3000, () => {
+      console.info('Listening at http://localhost:3000')
+    })
+  } catch (error) {
+    console.error(error)
+    await ctx?.stop()
+  }
+})()
