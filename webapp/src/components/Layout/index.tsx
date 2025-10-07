@@ -1,10 +1,10 @@
 import { Link, Outlet } from 'react-router-dom'
+import { useMe } from '../../lib/ctx.tsx'
 import { getAllIdeasRoute, getNewIdeaRoute, getSignInRoute, getSignOutPage, getSignUpRoute } from '../../lib/routes.ts'
-import { trpc } from '../../lib/trpc.tsx'
 import css from './index.module.scss'
 
 export const Layout = () => {
-  const { data, isError, isLoading, isFetching } = trpc.getMe.useQuery()
+  const me = useMe()
 
   return (
     <div className={css.layout}>
@@ -16,7 +16,7 @@ export const Layout = () => {
               All Ideas
             </Link>
           </li>
-          {isLoading || isFetching || isError ? null : data.me ? (
+          {me ? (
             <>
               <li className={css.item}>
                 <Link className={css.link} to={getNewIdeaRoute()}>
@@ -25,7 +25,7 @@ export const Layout = () => {
               </li>
               <li className={css.item}>
                 <Link className={css.link} to={getSignOutPage()}>
-                  Log Out ({data.me.nick})
+                  Log Out ({me.nick})
                 </Link>
               </li>
             </>

@@ -8,6 +8,7 @@ import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
+import { useMe } from '../../lib/ctx.tsx'
 import { useForm } from '../../lib/form.tsx'
 import { type EditIdeaRouteParams, getViewIdeaRoute } from '../../lib/routes.ts'
 import { trpc } from '../../lib/trpc.tsx'
@@ -49,9 +50,9 @@ export const EditIdeaPage = () => {
     ideaNick,
   })
 
-  const getMeResult = trpc.getMe.useQuery()
+  const me = useMe()
 
-  if (getIdeaResult.isLoading || getIdeaResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) {
+  if (getIdeaResult.isLoading || getIdeaResult.isFetching) {
     return <span>Loading...</span>
   }
 
@@ -59,12 +60,7 @@ export const EditIdeaPage = () => {
     return <span>Error: {getIdeaResult.error.message}</span>
   }
 
-  if (getMeResult.isError) {
-    return <span>Error: {getMeResult.error.message}</span>
-  }
-
   const idea = getIdeaResult.data.idea
-  const me = getMeResult.data.me
 
   if (!idea) {
     return <span>Idea not found</span>
