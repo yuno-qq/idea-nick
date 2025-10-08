@@ -1,13 +1,13 @@
 import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/createIdea/input'
-import { Alert } from '../../components/Alert'
-import { Button } from '../../components/Button'
-import { FormItems } from '../../components/FormItems'
-import { Input } from '../../components/Input'
-import { Segment } from '../../components/Segment'
-import { Textarea } from '../../components/Textarea'
-import { useForm } from '../../lib/form.tsx'
-import { withPageWrapper } from '../../lib/pageWrapper.tsx'
-import { trpc } from '../../lib/trpc'
+import { Alert } from '../../../components/Alert'
+import { Button } from '../../../components/Button'
+import { FormItems } from '../../../components/FormItems'
+import { Input } from '../../../components/Input'
+import { Segment } from '../../../components/Segment'
+import { Textarea } from '../../../components/Textarea'
+import { useForm } from '../../../lib/form.tsx'
+import { withPageWrapper } from '../../../lib/pageWrapper.tsx'
+import { trpc } from '../../../lib/trpc.tsx'
 
 export const NewIdeaPage = withPageWrapper({
   authorizedOnly: true,

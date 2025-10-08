@@ -1,4 +1,4 @@
-import { ErrorPageComponent } from '../../components/ErrorPageComponent'
+import { ErrorPageComponent } from '../../../components/ErrorPageComponent'
 
 export const NotFoundPage = ({
   title = 'Not Found',

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Segment } from '../../components/Segment'
-import { getViewIdeaRoute } from '../../lib/routes.ts'
-import { trpc } from '../../lib/trpc'
+import { Segment } from '../../../components/Segment'
+import { getViewIdeaRoute } from '../../../lib/routes.ts'
+import { trpc } from '../../../lib/trpc.tsx'
 import css from './index.module.scss'
 
 export const AllIdeasPage = () => {
