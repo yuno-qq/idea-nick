@@ -1,5 +1,4 @@
-import { zSignInTrpcInput } from '@ideanick/backend/src/router/auth/signIn/input'
-import Cookies from 'js-cookie'
+import { zUpdateProfileTrpcInput } from '@ideanick/backend/src/router/auth/updateProfile/input'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'
 import { FormItems } from '../../../components/FormItems'
@@ -9,34 +8,37 @@ import { useForm } from '../../../lib/form.tsx'
 import { withPageWrapper } from '../../../lib/pageWrapper.tsx'
 import { trpc } from '../../../lib/trpc.tsx'
 
-export const SignInPage = withPageWrapper({
-  redirectAuthorized: true,
-})(() => {
+export const EditProfilePage = withPageWrapper({
+  authorizedOnly: true,
+  setProps: ({ ctx }) => ({
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    me: ctx.me!,
+  }),
+})(({ me }) => {
   const trpcUtils = trpc.useContext()
-  const signIn = trpc.signIn.useMutation()
-
+  const updateProfile = trpc.updateProfile.useMutation()
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {
-      nick: '',
-      password: '',
+      name: me.name,
+      nick: me.nick,
     },
-    validationSchema: zSignInTrpcInput,
+    validationSchema: zUpdateProfileTrpcInput,
     onSubmit: async (values) => {
-      const { token } = await signIn.mutateAsync(values)
-      Cookies.set('token', token, { expires: 99999 })
-      void trpcUtils.invalidate()
+      const updatedMe = await updateProfile.mutateAsync(values)
+      trpcUtils.getMe.setData(undefined, { me: updatedMe })
     },
+    successMessage: 'Profile updated',
     resetOnSuccess: false,
   })
 
   return (
-    <Segment title="Sign In">
+    <Segment title="Edit Profile">
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
           <Input name="nick" label="Nick" formik={formik} />
-          <Input name="password" label="Password" type="password" formik={formik} />
+          <Input name="name" label="Name" formik={formik} />
           <Alert {...alertProps} />
-          <Button {...buttonProps}>Sign In</Button>
+          <Button {...buttonProps}>Update Profile</Button>
         </FormItems>
       </form>
     </Segment>

@@ -1,4 +1,4 @@
-import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/createIdea/input'
+import { zCreateIdeaTrpcInput } from '@ideanick/backend/src/router/ideas/createIdea/input'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'
 import { FormItems } from '../../../components/FormItems'

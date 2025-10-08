@@ -1,4 +1,4 @@
-import { zUpdateIdeaTrpcInput } from '@ideanick/backend/src/router/updateIdea/input'
+import { zUpdateIdeaTrpcInput } from '@ideanick/backend/src/router/ideas/updateIdea/input'
 import _ from 'lodash'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'

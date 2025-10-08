@@ -1,4 +1,4 @@
-import { zSignUpTrpcInput } from '@ideanick/backend/src/router/signUp/input'
+import { zSignUpTrpcInput } from '@ideanick/backend/src/router/auth/signUp/input'
 import Cookies from 'js-cookie'
 import { z } from 'zod'
 import { Alert } from '../../../components/Alert'
