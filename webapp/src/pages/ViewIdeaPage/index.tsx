@@ -12,12 +12,9 @@ export const ViewIdeaPage = withPageWrapper({
     const { ideaNick } = useParams() as ViewIdeaRouteParams
     return trpc.getIdea.useQuery({ ideaNick })
   },
-  checkExists: ({ queryResult }) => !!queryResult.data.idea,
-  checkExistsMessage: 'Idea not found',
-  setProps: ({ queryResult, ctx }) => {
+  setProps: ({ queryResult, ctx, checkExists }) => {
     return {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      idea: queryResult.data.idea!,
+      idea: checkExists(queryResult.data.idea, 'Idea not found'),
       me: ctx.me,
     }
   },
