@@ -1,6 +1,7 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { Link } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
+import { Loader } from '../../../components/Loader'
 import { Segment } from '../../../components/Segment'
 import { getViewIdeaRoute } from '../../../lib/routes.ts'
 import { trpc } from '../../../lib/trpc.tsx'
@@ -34,7 +35,7 @@ export const AllIdeasPage = () => {
   return (
     <Segment title="All Ideas">
       {isLoading || isRefetching ? (
-        <div>Loading...</div>
+        <Loader type="section" />
       ) : isError ? (
         <Alert color="red">{error.message}</Alert>
       ) : (
@@ -55,8 +56,8 @@ export const AllIdeasPage = () => {
               </div>
             ))}
           {hasNextPage && (
-            <div ref={infiniteRef} className={css.more}>
-              Loading...
+            <div className={css.more}>
+              <Loader ref={infiniteRef} type="section" />
             </div>
           )}
         </div>
