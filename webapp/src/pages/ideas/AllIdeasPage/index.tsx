@@ -1,3 +1,4 @@
+import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { Link } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
 import { Segment } from '../../../components/Segment'
@@ -17,6 +18,18 @@ export const AllIdeasPage = () => {
         },
       }
     )
+
+  const [infiniteRef] = useInfiniteScroll({
+    loading: isFetchingNextPage,
+    hasNextPage: hasNextPage || false,
+    onLoadMore: () => {
+      if (!isFetchingNextPage && hasNextPage) {
+        void fetchNextPage()
+      }
+    },
+    disabled: Boolean(error),
+    rootMargin: '0px 0px 250px 0px',
+  })
 
   return (
     <Segment title="All Ideas">
@@ -41,18 +54,11 @@ export const AllIdeasPage = () => {
                 />
               </div>
             ))}
-          <div className={css.more}>
-            {hasNextPage && !isFetchingNextPage && (
-              <button
-                onClick={() => {
-                  void fetchNextPage()
-                }}
-              >
-                Load more
-              </button>
-            )}
-            {isFetchingNextPage && <span>Loading...</span>}
-          </div>
+          {hasNextPage && (
+            <div ref={infiniteRef} className={css.more}>
+              Loading...
+            </div>
+          )}
         </div>
       )}
     </Segment>
