@@ -10,7 +10,7 @@ import css from './index.module.scss'
 
 const LikeButton = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['idea']> }) => {
   const trpcUtils = trpc.useContext()
-  trpc.setIdeaLike.useMutation({
+  const setIdeaLike = trpc.setIdeaLike.useMutation({
     onMutate: ({ isLikedByMe }) => {
       const oldGetIdeaData = trpcUtils.getIdea.getData({ ideaNick: idea.nick })
       if (oldGetIdeaData?.idea) {
@@ -30,7 +30,16 @@ const LikeButton = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['i
     },
   })
 
-  return null
+  return (
+    <button
+      className={css.likeButton}
+      onClick={() => {
+        void setIdeaLike.mutateAsync({ ideaId: idea.id, isLikedByMe: !idea.isLikedByMe })
+      }}
+    >
+      {idea.isLikedByMe ? 'Unlike' : 'Like'}
+    </button>
+  )
 }
 
 export const ViewIdeaPage = withPageWrapper({
@@ -44,6 +53,7 @@ export const ViewIdeaPage = withPageWrapper({
       me: ctx.me,
     }
   },
+  showLoaderOnFetching: false,
 })(({ idea, me }) => {
   return (
     <div>
