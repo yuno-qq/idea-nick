@@ -1,8 +1,12 @@
 import type { TrpcRouterOutput } from '@ideanick/backend/src/router'
+import { canBlockIdeas, canEditIdea } from '@ideanick/backend/src/utils/can'
 import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
-import { LinkButton } from '../../../components/Button'
+import { Alert } from '../../../components/Alert'
+import { Button, LinkButton } from '../../../components/Button'
+import { FormItems } from '../../../components/FormItems'
 import { Segment } from '../../../components/Segment'
+import { useForm } from '../../../lib/form.tsx'
 import { withPageWrapper } from '../../../lib/pageWrapper.tsx'
 import { getEditIdeaRoute, type ViewIdeaRouteParams } from '../../../lib/routes.ts'
 import { trpc } from '../../../lib/trpc.tsx'
@@ -42,6 +46,28 @@ const LikeButton = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['i
   )
 }
 
+const BlockIdea = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['idea']> }) => {
+  const blockIdea = trpc.blockIdea.useMutation()
+  const trpcUtils = trpc.useContext()
+  const { formik, alertProps, buttonProps } = useForm({
+    onSubmit: async () => {
+      await blockIdea.mutateAsync({ ideaId: idea.id })
+      await trpcUtils.getIdea.refetch({ ideaNick: idea.nick })
+    },
+  })
+
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <FormItems>
+        <Alert {...alertProps} />
+        <Button color="red" {...buttonProps}>
+          Block Idea
+        </Button>
+      </FormItems>
+    </form>
+  )
+}
+
 export const ViewIdeaPage = withPageWrapper({
   useQuery: () => {
     const { ideaNick } = useParams() as ViewIdeaRouteParams
@@ -73,9 +99,14 @@ export const ViewIdeaPage = withPageWrapper({
             </>
           )}
         </div>
-        {me?.id === idea.authorId && (
+        {canEditIdea(me, idea) && (
           <div className={css.editButton}>
             <LinkButton to={getEditIdeaRoute({ ideaNick: idea.nick })}>Edit Idea</LinkButton>
+          </div>
+        )}
+        {canBlockIdeas(me) && (
+          <div className={css.blockIdea}>
+            <BlockIdea idea={idea} />
           </div>
         )}
       </Segment>
