@@ -80,6 +80,7 @@ export const ViewIdeaPage = withPageWrapper({
     }
   },
   showLoaderOnFetching: false,
+  title: ({ idea }) => idea.name,
 })(({ idea, me }) => {
   return (
     <div>

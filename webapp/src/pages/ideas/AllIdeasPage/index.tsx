@@ -7,11 +7,15 @@ import { Input } from '../../../components/Input'
 import { Loader } from '../../../components/Loader'
 import { Segment } from '../../../components/Segment'
 import { useForm } from '../../../lib/form.tsx'
+import { withPageWrapper } from '../../../lib/pageWrapper.tsx'
 import { getViewIdeaRoute } from '../../../lib/routes.ts'
 import { trpc } from '../../../lib/trpc.tsx'
 import css from './index.module.scss'
 
-export const AllIdeasPage = () => {
+export const AllIdeasPage = withPageWrapper({
+  title: 'IdeaNick',
+  isTitleExact: true,
+})(() => {
   const { formik } = useForm({
     initialValues: {
       search: '',
@@ -84,4 +88,4 @@ export const AllIdeasPage = () => {
       )}
     </Segment>
   )
-}
+})

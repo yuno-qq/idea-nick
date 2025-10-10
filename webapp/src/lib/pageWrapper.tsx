@@ -1,5 +1,6 @@
 import type { UseTRPCQueryResult, UseTRPCQuerySuccessResult } from '@trpc/react-query/shared'
 import { useEffect } from 'react'
+import { Title } from 'react-head'
 import { useNavigate } from 'react-router-dom'
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
 import { Loader } from '../components/Loader'
@@ -57,6 +58,9 @@ type PageWrapperProps<TProps extends Props, TQueryResult extends QueryResult | u
 
   showLoaderOnFetching?: boolean
 
+  title: string | ((titleProps: HelperProps<TQueryResult> & TProps) => string)
+  isTitleExact?: boolean
+
   useQuery?: () => TQueryResult
   setProps?: (setPropsProps: SetPropsProps<TQueryResult>) => TProps
   Page: React.FC<TProps>
@@ -77,6 +81,8 @@ const PageWrapper = <TProps extends Props = {}, TQueryResult extends QueryResult
   setProps,
   Page,
   showLoaderOnFetching = true,
+  title,
+  isTitleExact = false,
 }: PageWrapperProps<TProps, TQueryResult>) => {
   const navigate = useNavigate()
   const ctx = useAppContext()
@@ -132,7 +138,14 @@ const PageWrapper = <TProps extends Props = {}, TQueryResult extends QueryResult
       checkAccess: checkAccessFn,
       getAuthorizedMe,
     }) as TProps
-    return <Page {...props} />
+    const calculatedTitle = typeof title === 'function' ? title({ ...helperProps, ...props }) : title
+    const exactTitle = isTitleExact ? calculatedTitle : `${calculatedTitle} - IdeaNick`
+    return (
+      <>
+        <Title>{exactTitle}</Title>
+        <Page {...props} />
+      </>
+    )
   } catch (error) {
     if (error instanceof CheckExistsError) {
       return <ErrorPageComponent title={checkExistsTitle} message={error.message || checkExistsMessage} />
