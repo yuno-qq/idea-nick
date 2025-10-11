@@ -27,6 +27,7 @@ enum UserPermission {
 model Idea {
   id           String     @id @default(uuid())
   nick         String     @unique
+  email        String     @unique
   serialNumber Int        @unique @default(autoincrement())
   name         String
   description  String
