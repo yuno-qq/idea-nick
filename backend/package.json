@@ -3,14 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "ts-node-dev --watch ./.env --rs --exit-child ./src/index.ts",
+    "dev": "ts-node-dev --watch ./src/emails/dist,./.env --rs --exit-child ./src/index.ts",
+    "build-emails": "rimraf ./src/emails/dist && cmd /c mkdir .\\src\\emails\\dist && mjml ./src/emails/*.mjml -o ./src/emails/dist",
+    "watch-emails": "mjml -w ./src/emails/*.mjml -o ./src/emails/dist",
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
     "start": "node ./dist/index.js",
     "pmd": "prisma migrate dev",
     "pgc": "prisma generate",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",
-    "FIXME_prepare": "pnpm pgc"
+    "TODO_prepare": "pnpm pgc"
   },
   "prisma": {
     "schema": "./src/prisma/schema.prisma"
@@ -23,6 +25,7 @@
     "express": "4.18.2",
     "jsonwebtoken": "9.0.2",
     "lodash": "^4.17.21",
+    "mjml": "4.14.1",
     "passport": "0.6.0",
     "passport-jwt": "4.0.1",
     "superjson": "1.13.3",
