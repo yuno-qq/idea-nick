@@ -1,3 +1,4 @@
+import { sendIdeaBlockedEmail } from '../../../lib/emails'
 import { trpc } from '../../../lib/trpc'
 import { canBlockIdeas } from '../../../utils/can'
 import { zBlockIdeaTrpcInput } from './input'
@@ -11,6 +12,9 @@ export const blockIdeaTrpcRoute = trpc.procedure.input(zBlockIdeaTrpcInput).muta
     where: {
       id: ideaId,
     },
+    include: {
+      author: true,
+    },
   })
   if (!idea) {
     throw new Error('NOT_FOUND')
@@ -20,10 +24,10 @@ export const blockIdeaTrpcRoute = trpc.procedure.input(zBlockIdeaTrpcInput).muta
       id: ideaId,
     },
     data: {
-      ...idea,
       blockedAt: new Date(),
     },
   })
+  void sendIdeaBlockedEmail({ idea, user: idea.author })
 
   return true
 })
