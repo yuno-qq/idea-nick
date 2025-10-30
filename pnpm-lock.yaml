@@ -160,6 +160,9 @@ importers:
       '@ideanick/shared':
         specifier: workspace:*
         version: link:../shared
+      '@nanostores/react':
+        specifier: 0.7.1
+        version: 0.7.1(nanostores@0.9.3)(react@19.2.0)
       '@tanstack/react-query':
         specifier: 4.32.6
         version: 4.32.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -193,6 +196,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      nanostores:
+        specifier: 0.9.3
+        version: 0.9.3
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -1174,6 +1180,13 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@nanostores/react@0.7.1':
+    resolution: {integrity: sha512-EXQg9N4MdI4eJQz/AZLIx3hxQ6BuBmV4Q55bCd5YCSgEOAW7tGTsIZxpRXxvxLXzflNvHTBvfrDNY38TlSVBkQ==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0
+      react: '>=18.0.0'
 
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}
@@ -3477,6 +3490,10 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanostores@0.9.3:
+    resolution: {integrity: sha512-KobZjcVyNndNrb5DAjfs0WG0lRcZu5Q1BOrfTOxokFLi25zFrWPjg+joXC6kuDqNfSt9fQwppyjUBkRPtsL+8w==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+
   natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
 
@@ -5623,6 +5640,11 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@nanostores/react@0.7.1(nanostores@0.9.3)(react@19.2.0)':
+    dependencies:
+      nanostores: 0.9.3
+      react: 19.2.0
 
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     dependencies:
@@ -8360,6 +8382,8 @@ snapshots:
   nano-spawn@1.0.3: {}
 
   nanoid@3.3.11: {}
+
+  nanostores@0.9.3: {}
 
   natural-compare-lite@1.4.0: {}
 
