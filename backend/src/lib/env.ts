@@ -1,26 +1,20 @@
+import { zEnvHost, zEnvNonemptyTrimmed, zEnvNonemptyTrimmedRequiredOnNotLocal } from '@ideanick/shared/src/zod'
 import * as dotenv from 'dotenv'
 import { z } from 'zod'
 
 dotenv.config()
 
-const zNonEmptyTrimmed = z.string().trim().min(1)
-const zNonEmptyTrimmedRequiredOnNotLocal = zNonEmptyTrimmed.optional().refine(
-  // eslint-disable-next-line node/no-process-env
-  (val) => process.env.HOST_ENV === 'local' || !!val,
-  'Required on local host'
-)
-
 const zEnv = z.object({
-  PORT: zNonEmptyTrimmed,
-  HOST_ENV: z.enum(['local', 'production']),
-  DATABASE_URL: zNonEmptyTrimmed,
-  JWT_SECRET: zNonEmptyTrimmed,
-  PASSWORD_SALT: zNonEmptyTrimmed,
-  INITIAL_ADMIN_PASSWORD: zNonEmptyTrimmed,
-  WEBAPP_URL: zNonEmptyTrimmed,
-  BREVO_API_KEY: zNonEmptyTrimmedRequiredOnNotLocal,
-  FROM_EMAIL_NAME: zNonEmptyTrimmed,
-  FROM_EMAIL_ADDRESS: zNonEmptyTrimmed,
+  PORT: zEnvNonemptyTrimmed,
+  HOST_ENV: zEnvHost,
+  DATABASE_URL: zEnvNonemptyTrimmed,
+  JWT_SECRET: zEnvNonemptyTrimmed,
+  PASSWORD_SALT: zEnvNonemptyTrimmed,
+  INITIAL_ADMIN_PASSWORD: zEnvNonemptyTrimmed,
+  WEBAPP_URL: zEnvNonemptyTrimmed,
+  BREVO_API_KEY: zEnvNonemptyTrimmedRequiredOnNotLocal,
+  FROM_EMAIL_NAME: zEnvNonemptyTrimmed,
+  FROM_EMAIL_ADDRESS: zEnvNonemptyTrimmed,
 })
 
 // eslint-disable-next-line node/no-process-env
