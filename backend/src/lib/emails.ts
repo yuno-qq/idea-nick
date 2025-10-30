@@ -47,7 +47,7 @@ const sendEmail = async ({
     const html = await getEmailHtml(templateName, fullTemplateVariables)
     const { loggableResponse } = await sendEmailThroughBrevo({ to, subject, html })
 
-    logger.info('sendEmail', {
+    logger.info('emails', 'sendEmail', {
       to,
       templateName,
       templateVariables,
@@ -56,6 +56,11 @@ const sendEmail = async ({
 
     return { ok: true }
   } catch (error) {
+    logger.error('emails', error, {
+      to,
+      templateName,
+      templateVariables,
+    })
     return { ok: false }
   }
 }
