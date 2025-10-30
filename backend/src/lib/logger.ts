@@ -1,4 +1,5 @@
 import { EOL } from 'os'
+import { debug } from 'debug'
 import _ from 'lodash'
 import pc from 'picocolors'
 import { serializeError } from 'serialize-error'
@@ -24,7 +25,7 @@ const winstonLogger = winston.createLogger({
           ? winston.format.json()
           : winston.format((logData) => {
               const setColor = {
-                info: (str: string) => pc.blue(str),
+                info: (str: string) => pc.bgBlue(str),
                 error: (str: string) => pc.red(str),
                 debug: (str: string) => pc.cyan(str),
               }[logData.level as 'info' | 'error' | 'debug']
@@ -62,9 +63,15 @@ const winstonLogger = winston.createLogger({
 
 export const logger = {
   info: (logType: string, message: string, meta?: Record<string, any>) => {
+    if (!debug.enabled(`ideanick:${logType}`)) {
+      return
+    }
     winstonLogger.info(message, { logType, ...meta })
   },
   error: (logType: string, error: any, meta?: Record<string, any>) => {
+    if (!debug.enabled(`ideanick:${logType}`)) {
+      return
+    }
     const serializedError = serializeError(error)
     winstonLogger.error(serializedError.message || 'Unknown error', {
       logType,
