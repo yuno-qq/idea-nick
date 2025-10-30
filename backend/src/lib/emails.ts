@@ -7,6 +7,7 @@ import Handlebars from 'handlebars'
 import _ from 'lodash'
 import { sendEmailThroughBrevo } from './brevo'
 import { env } from './env'
+import { logger } from './logger'
 
 const getHbrTemplates = _.memoize(async () => {
   const htmlPathsPattern = path.resolve(__dirname, '../emails/dist')
@@ -46,7 +47,7 @@ const sendEmail = async ({
     const html = await getEmailHtml(templateName, fullTemplateVariables)
     const { loggableResponse } = await sendEmailThroughBrevo({ to, subject, html })
 
-    console.info('sendEmail', {
+    logger.info('sendEmail', {
       to,
       templateName,
       templateVariables,
